@@ -1,12 +1,15 @@
-# e4040-2019Fall-assign2
-Assignment 2 for ECBM E4040 2019 Fall Course (student version without solutions). 
-This repository (in Github Classroom) is the student version of the assignment for e4040 2019 Fall.
-To complete the assignment/homework, the students need to create a copy of this repository and put their solution into that repository.
+Optimizers: 
+- numpy implementation of SGD with Momentum, RMSprop and Adam.
 
-INSTRUCTIONS for naming the student's solution repository for assignments with one student:
-* Students need to use the following name for the repository with their solutions: e4040-2019Fall-assign2-UNI (the first part "e4040-2019Fall-assign2" will probably be inherited from the assignment, so only UNI needs to be added) 
-* Initially, the system may give the repo a name which ends with a  student's Github userid. The student should change that name and replace it with the name requested in the point above
-* Good Example: e4040-2019Fall-assign2-zz9999;   Bad example: e4040-2019Fall-assign2-e4040-2019Fall-assign2-zz9999.
+Regularization:
+- To efficienlty train a good neural network, using a suitable optimizer is important but not enough. Other important considerations include how to select good initialization values for ANN parameters, and how to avoid overfitting. 
+- Dropout and Batch Normalization. Implemented in numpy.
 
-INSTRUCTIONS for naming the students' solution repository for assignments with more students, such as the final project. Students need to use a 4-letter groupID): 
-* Template: e4040-2019Fall-Project-GroupID-UNI1-UNI2-UNI3. -> Example: e4040-2019Fall-Project-MEME-zz9999-aa9999-aa0000.
+Convolutional Neural Network (CNN):
+- In contrast to the Multi-Layer Perceptron (ML) or fully-connected (FC) nets, Convolutional Neural Netwworks are a more powerful tool often used in the field of computer vision. Create a CNN using Tensorflow.
+
+Data Augmentation:
+- Data augmentation is very useful for CNNs. It can enrich the collected datasets by enlarging them using the operations on the original data samples. It can promote the performance of networks. Create a data generator which does several augmentations.
+
+Bottle Kaggle Competition:
+- In-class Kaggle competition and compete with your classmates on the "bottle classification problem". You need to keep updating your CNN in iterations to get the best possible result. Kaggle will enable you to observe the progress made by students in the class. You can use any/all of the deep learning modelling techiques (e.g. regularization, optimization) to get the best possible performance. TensorFlow 1.13 used to build model.
