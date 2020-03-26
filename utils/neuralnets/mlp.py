@@ -2,13 +2,6 @@
 
 # MLP class and functions
 
-#################################
-# author = Drew Afromsky        #
-# email = daa2162@columbia.edu  #
-#################################
-
-#### Code was completed by Drew Afromsky for the assignment for Nerual Networks and Deep Learning, ECBM 4040, @Columbia University, Fall 2019 ###
-
 import numpy as np
 
 from utils.layer_funcs import *
@@ -16,6 +9,7 @@ from utils.reg_funcs import *
 
 
 class MLP(object):
+
     """
     MLP with an arbitrary number of dense hidden layers,
     and a softmax loss function. For a network with L layers,
@@ -28,6 +22,7 @@ class MLP(object):
 
     def __init__(self, input_dim=3072, hidden_dims=[200, 200], num_classes=10, weight_scale=1e-2,
                  l2_reg=0.0, use_bn=None, dropout_config=None):
+    
         """
         Inputs:
         - weight_scale: (float) for layer weight initialization
@@ -35,6 +30,7 @@ class MLP(object):
         - use_bn: (bool) decide whether to use batch normalization or not
         - dropout_config: (dict) configuration for dropout
         """
+        
         params = dict()
         grads = dict()
 
@@ -78,6 +74,7 @@ class MLP(object):
         self.bn_params = bn_params
 
     def loss(self, X, y):
+        
         """
         Calculate the cross-entropy loss and then use backpropogation
         to get gradients wst W,b in each layer.
@@ -98,6 +95,7 @@ class MLP(object):
         cache = dict()
         params = self.params
         grads = dict()
+        
         ###################################################
         # Feedforward                                     #
         ###################################################
@@ -166,6 +164,7 @@ class MLP(object):
         return loss
 
     def predict(self, X):
+        
         """
         Return the label prediction of input data
         
@@ -175,6 +174,7 @@ class MLP(object):
         Returns: 
         - predictions: (int) an array of length N
         """
+        
         predictions = None
         num_layers = self.num_layers
         params = self.params
@@ -207,6 +207,7 @@ class MLP(object):
         return predictions
 
     def check_accuracy(self, X, y):
+        
         """
         Return the classification accuracy of input data
         
