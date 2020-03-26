@@ -1,18 +1,9 @@
 #!/usr/bin/env/ python
 
-# This Python script contains various functions for layer construction.
-
-#################################
-# author = Drew Afromsky        #
-# email = daa2162@columbia.edu  #
-#################################
-
-#### Code was completed by Drew Afromsky for the assignment for Nerual Networks and Deep Learning, ECBM 4040, @Columbia University, Fall 2019 ###
-
 import numpy as np
 
-
 def affine_forward(x, w, b):
+    
     """
     Computes the forward pass for an affine (fully-connected) layer.
 
@@ -30,14 +21,15 @@ def affine_forward(x, w, b):
     - out: output, of shape (N, M)
     - cache: x, w, b for back-propagation
     """
+    
     num_train = x.shape[0]
     x_flatten = x.reshape((num_train, -1))
     out = np.dot(x_flatten, w) + b
     cache = (x, w, b)
     return out, cache
 
-
 def affine_backward(dout, cache):
+    
     """
     Computes the backward pass for an affine layer.
     :param dout: Upstream derivative, of shape (N, M)
@@ -50,6 +42,7 @@ def affine_backward(dout, cache):
     - dw: Gradient with respect to w, of shape (D, M)
     - db: Gradient with respect to b, of shape (M,)
     """
+    
     x, w, b = cache
 
     N = x.shape[0]
@@ -61,8 +54,8 @@ def affine_backward(dout, cache):
 
     return dx, dw, db
 
-
 def relu_forward(x):
+    
     """
     Computes the forward pass for a layer of rectified linear units (ReLUs).
 
@@ -71,13 +64,13 @@ def relu_forward(x):
     - out: Output, of the same shape as x
     - cache: x for back-propagation
     """
+    
     out = np.zeros_like(x)
     out[np.where(x > 0)] = x[np.where(x > 0)]
 
     cache = x
 
     return out, cache
-
 
 def relu_backward(dout, cache):
     """
@@ -95,8 +88,8 @@ def relu_backward(dout, cache):
 
     return dx
 
-
 def softmax_loss(x, y):
+    
     """
     Softmax loss function, vectorized version.
     y_prediction = argmax(softmax(x))
@@ -107,6 +100,7 @@ def softmax_loss(x, y):
     :return: loss - the loss function
              dx - the gradient wrt x
     """
+    
     loss = 0.0
     num_train = x.shape[0]
 
@@ -128,11 +122,9 @@ def softmax_loss(x, y):
 
 
 def conv2d_forward(x, w, b, pad, stride):
+    
     """
     A Numpy implementation of 2-D image convolution.
-    By 'convolution', element-wise multiplication and summation will suffice.
-    The border mode is 'valid' - Your convolution only happens when your input and your filter fully overlap.
-    Here, 'pad' means the number rows/columns of zeroes to concatenate before/after the edge of input.
 
     Inputs:
     :param x: Input data. Should have size (batch, height, width, channels).
@@ -175,6 +167,7 @@ def conv2d_forward(x, w, b, pad, stride):
     return new_x
 
 def conv2d_backward(d_top, x, w, b, pad, stride):
+    
     """
     A lite Numpy implementation of 2-D image convolution back-propagation.
 
@@ -189,10 +182,6 @@ def conv2d_backward(d_top, x, w, b, pad, stride):
 
     :return: (d_w, d_b), i.e. the derivative with respect to w and b. For example, d_w means how a change of each value
      of weight w would affect the final loss function.
-
-    Note:
-    Normally we also need to compute d_x in order to pass the gradients down to lower layers, so this is merely a
-    simplified version where we don't need to back-propagate.
     """
 
     batch, height, width, channels = x.shape
@@ -220,6 +209,7 @@ def conv2d_backward(d_top, x, w, b, pad, stride):
     return dw, db, dw.shape 
 
 def max_pool_forward(x, pool_size, stride):
+    
     """
     A Numpy implementation of 2-D image max pooling.
 

@@ -2,13 +2,6 @@
 
 # Optimizer implementations
 
-#################################
-# author = Drew Afromsky        #
-# email = daa2162@columbia.edu  #
-#################################
-
-#### Code was completed by Drew Afromsky for the assignment for Nerual Networks and Deep Learning, ECBM 4040, @Columbia University, Fall 2019 ###
-
 import numpy as np
 
 class Optimizer(object):
@@ -16,8 +9,6 @@ class Optimizer(object):
               num_epoch=10, batch_size=500, learning_rate=1e-3, learning_decay=0.95, verbose=False, record_interval=10):
 
         """
-        This function is for training
-
         Inputs:
         :param model: (class MLP) a MLP model
         :param X_train: (float32) input data, a tensor with shape (N, D1, D2, ...)
@@ -30,6 +21,7 @@ class Optimizer(object):
         :param learning_decay: (float) reduce learning rate every epoch
         :param verbose: (boolean) whether report training process
         """
+        
         num_train = X_train.shape[0]
         num_batch = num_train // batch_size
         print('number of batches for training: {}'.format(num_batch))
@@ -72,6 +64,7 @@ class Optimizer(object):
         return loss_hist, train_acc_hist, valid_acc_hist
 
     def test(self, model, X_test, y_test, batch_size=10000):
+        
         """
         Inputs:
         :param model: (class MLP) a MLP model
@@ -111,9 +104,7 @@ class SGDOptim(Optimizer):
         pass
 
     def step(self, model, learning_rate):
-        """
-        Implement a one-step SGD update on network's parameters
-        
+        """        
         Inputs:
         :param model: a neural network class object
         :param learning_rate: (float)
@@ -130,6 +121,7 @@ class SGDOptim(Optimizer):
 
 class SGDmomentumOptim(Optimizer):
     def __init__(self, model, momentum=0.5):
+        
         """
         Inputs:
         :param model: a neural netowrk class object
@@ -142,6 +134,7 @@ class SGDmomentumOptim(Optimizer):
         self.velocitys = velocitys
 
     def step(self, model, learning_rate):
+        
         """
         Implement a one-step SGD+momentum update on network's parameters
         
@@ -151,9 +144,11 @@ class SGDmomentumOptim(Optimizer):
         """
         momentum = self.momentum
         velocitys = self.velocitys
-        # get all parameters and their gradients
+        
+        # Get all parameters and their gradients
         params = model.params
         grads = model.grads
+        
         ###################################################
         # SGD + Momentum, Update params and velocitys     #
         ###################################################
@@ -164,6 +159,7 @@ class SGDmomentumOptim(Optimizer):
 
 class RMSpropOptim(Optimizer):
     def __init__(self, model, gamma=0.9, eps=1e-12):
+        
         """
         Inputs:
         :param model: a neural network class object
@@ -178,6 +174,7 @@ class RMSpropOptim(Optimizer):
         self.cache = cache
 
     def step(self, model, learning_rate):
+        
         """
         Implement a one-step RMSprop update on network's parameters
         And a good default learning rate can be 0.001.
@@ -190,8 +187,9 @@ class RMSpropOptim(Optimizer):
         eps = self.eps
         cache = self.cache
 
-        # create two new dictionaries containing all parameters and their gradients
+        # Create two new dictionaries containing all parameters and their gradients
         params, grads = model.params, model.grads
+        
         ###################################################
         # RMSprop, Update params and cache                #
         ###################################################
@@ -199,10 +197,9 @@ class RMSpropOptim(Optimizer):
             cache[k]=gamma*cache[k]+(1-gamma)*(grads[k])**2
             params[k]-=learning_rate*grads[k]/np.sqrt(cache[k]+eps)
 
-
-
 class AdamOptim(Optimizer):
     def __init__(self, model, beta1=0.9, beta2=0.999, eps=1e-8):
+        
         """
         Inputs:
         :param model: a neural network class object
@@ -210,6 +207,7 @@ class AdamOptim(Optimizer):
         :param beta2: (float) similar to beta1
         :param eps: (float) in different case, the good value for eps will be different
         """
+        
         self.beta1 = beta1
         self.beta2 = beta2
         self.eps = eps
@@ -224,6 +222,7 @@ class AdamOptim(Optimizer):
         self.t = 1
 
     def step(self, model, learning_rate):
+        
         """
         Implement a one-step Adam update on network's parameters
         
@@ -231,6 +230,7 @@ class AdamOptim(Optimizer):
         :param model: a neural network class object
         :param learning_rate: (float)
         """
+        
         beta1 = self.beta1
         beta2 = self.beta2
         eps = self.eps
@@ -238,13 +238,14 @@ class AdamOptim(Optimizer):
         momentums = self.momentums
         velocitys = self.velocitys
         t = self.t
-        # create two new dictionaries containing all parameters and their gradients
+        
+        # Create two new dictionaries containing all parameters and their gradients
         params, grads = model.params, model.grads
+        
         ###################################################
         # Adam, Update t, momentums, velocitys and        #
         # params                                          #
         ###################################################
-#         t+=1
         for k in grads:
             momentums[k] = beta1 * momentums[k] + (1-beta1) * grads[k]
             velocitys[k] = beta2 * velocitys[k] + (1-beta2) * grads[k]**2
