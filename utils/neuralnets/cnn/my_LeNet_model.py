@@ -2,14 +2,6 @@
 
 # TensorFlow custom CNN model
 
-#################################
-# author = Drew Afromsky        #
-# email = daa2162@columbia.edu  #
-#################################
-
-#### Code was completed by Drew Afromsky for the assignment for Nerual Networks and Deep Learning, ECBM 4040, @Columbia University, Fall 2019 ###
-
-
 import tensorflow as tf
 import numpy as np
 import time
